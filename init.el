@@ -16,7 +16,7 @@
 (require 'setup-packages)
 (require 'setup-mode-packages)
 
-;;(require 'setup-clojure)
+(require 'setup-clojure)
 ;;(require 'setup-javascript)
 ;;(require 'setup-web)
 (require 'setup-org-mode)
