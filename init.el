@@ -1,7 +1,7 @@
+(prefer-coding-system 'utf-8)
+
 (setq package-archives
-      '(
-        ("melpa" . "https://melpa.org/packages/")
-	)) ;; no https :(
+      '(("melpa" . "https://melpa.org/packages/")))
 
 (package-initialize)
 (unless (file-exists-p "~/.emacs.d/elpa/archives/melpa") (package-refresh-contents))
