@@ -14,7 +14,7 @@
 ;; startup-message 안 보기
 (setq inhibit-startup-message t)
 ;; scratch buffer initialize
-(setq initial-scratch-message "unfor9otten scratch buffer start")
+(setq initial-scratch-message nil)
 ;; 선택 텍스트를 타이핑할 때, 삭제
 (delete-selection-mode t)
 ;; 라인 넘버 보기
