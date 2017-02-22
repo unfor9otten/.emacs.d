@@ -1,0 +1,96 @@
+#+TITLE: init.d - Helm
+#+AUTHOR: thKim
+#+EMAIL: unfor9otten@gmail.com
+#+STARTUP: content
+#+OPTIONS: toc:2 num:nil ^:nil
+
+* use-package helm
+#+begin_src emacs-lisp
+(use-package helm :ensure t
+    :init (helm-mode 1))
+
+(defalias 'helm--make-source 'helm-make-source)
+#+end_src
+
+* Require built-ins
+
+#+begin_src emacs-lisp
+  (require 'helm-config)
+  (require 'helm-files)
+  (require 'helm-grep)
+#+end_src
+
+
+* Configuration
+
+#+begin_src emacs-lisp
+  (setq
+   helm-google-suggest-use-curl-p t
+   helm-scroll-amount 4
+   helm-quick-update t
+   helm-idle-delay 0.01
+   helm-input-idle-delay 0.01
+   helm-ff-search-library-in-sexp t
+   helm-split-window-default-side 'other
+   helm-split-window-in-side-p t
+   helm-buffers-favorite-modes (append helm-buffers-favorite-modes
+                                       '(picture-mode artist-mode))
+   helm-candidate-number-limit 200
+   helm-M-x-requires-pattern 0
+   helm-ff-file-name-history-use-recentf t
+   helm-move-to-line-cycle-in-source t
+   ido-use-virtual-buffers t
+   helm-buffers-fuzzy-matching t)
+#+end_src
+
+* helm 이맥스 화면 전체 이용 설정
+
+http://www.reddit.com/r/emacs/comments/345vtl/make_helm_window_at_the_bottom_without_using_any/
+
+#+begin_src emacs-lisp
+  (add-to-list 'display-buffer-alist
+               `(,(rx bos "*helm" (* not-newline) "*" eos)
+                 (display-buffer-in-side-window)
+                 (inhibit-same-window . t)
+                 (window-height . 0.381)))
+#+end_src
+
+* Use Helm to power M-x
+#+begin_src emacs-lisp
+  (global-set-key [remap execute-extended-command] 'helm-M-x)
+#+end_src
+
+* Projectile
+
+#+begin_src emacs-lisp
+  (use-package helm-projectile
+    :ensure t
+    :commands helm-projectile)
+#+end_src
+
+* helm swoop
+#+BEGIN_SRC emacs-lisp
+(use-package helm-swoop
+    :ensure t)
+
+#+END_SRC
+
+* 키 바인딩
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-x p") 'helm-projectile)
+
+(global-set-key (kbd "M-i") 'helm-swoop)
+;;(global-set-key (kbd "C-x C-f") 'helm-find-files)
+#+END_SRC
+
+#+begin_src emacs-lisp
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-z")  'helm-select-action)
+#+end_src
+
+#+begin_src emacs-lisp
+  (define-key helm-grep-mode-map (kbd "<return>")  'helm-grep-mode-jump-other-window)
+  (define-key helm-grep-mode-map (kbd "n")  'helm-grep-mode-jump-other-window-forward)
+  (define-key helm-grep-mode-map (kbd "p")  'helm-grep-mode-jump-other-window-backward)
+#+end_src

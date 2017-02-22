@@ -3,3 +3,5 @@ elpa
 projectile-bookmarks.eld
 bookmarks
 auto-save-list
+recentf
+init.d/init-*.el

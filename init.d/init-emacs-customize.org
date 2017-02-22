@@ -1,0 +1,154 @@
+#+TITLE: init.d - emacs customize settings
+#+AUTHOR: thKim
+#+EMAIL: unfor9otten@gmail.com
+#+STARTUP: content
+#+OPTIONS: toc:2 num:nil ^:nil
+
+* 이맥스 커스터마이징 설정
+#+BEGIN_SRC emacs-lisp
+;; 한글
+;;(set-language-environment "Korean")
+;; 한글 환경에서는 cp949 인코딩이 디폴트이기 때문.
+(prefer-coding-system 'utf-8)
+;; 날짜 표시를 영어로하려고
+(setq system-time-locale "C")
+
+;; startup-message 안 보기
+(setq inhibit-startup-message t)
+;; *scratch* 버퍼 깨끗하게 시작하기
+(setq initial-scratch-message nil)
+;; 선택 텍스트를 타이핑할 때, 삭제
+(delete-selection-mode t)
+;; 라인 넘버 보기
+(global-linum-mode t)
+;; 컬럼 넘버 보기
+(setq column-number-mode t)
+;; word-wrap
+(global-visual-line-mode t)
+;; 커서가 있는 라인 하이라이트
+(global-hl-line-mode t)
+
+;; syntax highlighting on
+(global-font-lock-mode t)
+
+(global-auto-revert-mode 1)
+
+;; tab -> space
+(setq indent-tabs-mode nil)
+
+(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+(setq ring-bell-function 'ignore)
+
+;;; http://robots.thoughtbot.com/no-newline-at-end-of-file
+(setq require-final-newline t)
+
+;;; title bar
+(setq frame-title-format "%b")
+
+#+END_SRC
+
+* 백업 파일 설정
+#+BEGIN_SRC emacs-lisp
+;;; backup
+(add-to-list 'backup-directory-alist '("." . "~/.emacs-saves"))
+(setq delete-old-versions t
+      kept-old-versions 2
+      kept-new-versions 2
+      version-control t)
+
+#+END_SRC
+
+* 테마 및 글꼴 설정
+** 테마 설정
+#+BEGIN_SRC emacs-lisp
+(use-package atom-one-dark-theme
+	     :ensure t
+	     :config
+	     (load-theme 'atom-one-dark t))
+#+END_SRC
+
+** 글꼴 설정
+#+BEGIN_SRC emacs-lisp
+
+(when *is-windows*
+ (set-face-attribute 'default nil :family "Consolas")
+ (set-face-attribute 'default nil :height 120))
+
+
+(set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+#+END_SRC
+
+* 유용한 패캐지 모음
+** 미분류
+#+BEGIN_SRC emacs-lisp
+(use-package yaml-mode
+  :ensure t)
+
+(use-package feature-mode
+  :ensure t)
+
+;; 괄호 등 자동완성 지원
+(use-package paredit
+  :ensure t)
+#+END_SRC
+
+** company 자동 완성
+#+BEGIN_SRC emacs-lisp
+;; 자동완성
+(use-package company
+  :ensure t
+  :bind (("C-c /". company-complete))
+  :config
+  (global-company-mode))
+
+;; 자동완성 정렬
+(use-package company-flx
+  :ensure t
+  :config
+  (company-flx-mode +1))
+#+END_SRC
+* 키 바인딩 
+#+BEGIN_SRC emacs-lisp
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+
+;; M-x - C-xC-m
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+
+;; global go to
+(global-set-key (kbd "M-g") 'goto-line)
+
+;;; emacs-lisp-mode
+(add-hook 'emacs-lisp-mode-hook
+	  (lambda ()
+	    (define-key emacs-lisp-mode-map "\C-c\C-c" 'eval-defun)))
+
+;;; lisp-interaction-mode
+(add-hook 'lisp-interaction-mode-hook
+	  (lambda ()
+	    (define-key lisp-interaction-mode-map "\C-c\C-c" 'eval-defun)))
+#+END_SRC
+* 쉘 스크립트 설정
+#+BEGIN_SRC emacs-lisp
+(when *is-linux*
+    (defalias 'sh 'ansi-term))
+
+(when *is-windows*
+  (defalias 'sh 'shell)
+  (let* ((git-dir "C:/Program Files/Git")
+	 (bash-dir (concat (file-name-as-directory git-dir) "bin")))
+    (setq explicit-shell-file-name (concat (file-name-as-directory bash-dir)
+					   "bash.exe"))
+    (setq shell-file-name explicit-shell-file-name)
+    (add-to-list 'exec-path git-dir)
+    (add-to-list 'exec-path bash-dir)
+    (setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
+    (setenv "SHELL" shell-file-name)
+    (setenv "PATH" (concat git-dir path-separator
+			   (concat bash-dir path-separator (getenv "PATH"))))))
+
+
+#+END_SRC
