@@ -102,7 +102,8 @@ skinparam monochrome true\n#+END_SRC"))
 * fstree
 
 #+begin_src emacs-lisp
-(package-install 'org-fstree)
+(unless (package-installed-p 'org-fstree)
+ (package-install 'org-fstree))
 (require 'org-fstree)
 #+end_src
 
@@ -123,7 +124,8 @@ skinparam monochrome true\n#+END_SRC"))
 * Pomodoro
 
 #+begin_src emacs-lisp
-  (package-install 'org-pomodoro)
+  (unless (package-installed-p 'org-pomodoro)
+     (package-install 'org-pomodoro))
   (require 'org-pomodoro)
 #+end_src
 
