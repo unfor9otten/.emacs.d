@@ -10,7 +10,7 @@
   (require 'org)
 #+end_src
 
-* 기본 설정
+* Basices
 
 #+begin_src emacs-lisp
   (setq org-log-done t
