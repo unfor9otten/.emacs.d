@@ -6,3 +6,4 @@ auto-save-list
 recentf
 init.d/init-*.el
 projectile.cache
+.trello
