@@ -35,7 +35,7 @@
   (ufn-load-org (format "init.d/init-%s" s)))
 
 ;; private extension load
-(defvar private-extension-file (concat *doc-home-path* "/private/extension-load"))
+(defvar private-extension-file (concat *doc-home-path* "/private/extension/extension-load"))
 
 (add-hook
  'after-init-hook
