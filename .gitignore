@@ -1,9 +1,7 @@
 \#*#
-elpa
-projectile-bookmarks.eld
+.cask
 bookmarks
 auto-save-list
 recentf
-init.d/init-*.el
 projectile.cache
-.trello
+projectile-bookmarks.eld
