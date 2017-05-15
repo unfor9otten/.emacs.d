@@ -16,7 +16,7 @@
 (setq make-backup-files nil)
 
 ;; Disable Auto-save File
-(setq auto-save-default nil)
+;;(setq auto-save-default nil)
 
 ;; Regular Replace Selection Behavior
 (delete-selection-mode 1)
@@ -34,6 +34,8 @@
 
 ;; Load Editor Theme
 (load-theme 'atom-one-dark t)
+;; (load-theme 'github t)
+
 ;; (load-theme 'solarized-light 1)
 
 ;; Disable Warning Bell

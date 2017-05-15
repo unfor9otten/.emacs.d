@@ -70,7 +70,7 @@
 ;; (setq deft-directory "~/.deft/")
 (setq
     deft-extension "org"
-    deft-directory "~/doc-home/"
+    deft-directory "~/org/"
     deft-text-mode 'org-mode
     deft-use-filename-as-title t)
 

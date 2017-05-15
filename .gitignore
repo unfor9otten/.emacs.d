@@ -3,5 +3,5 @@
 bookmarks
 auto-save-list
 recentf
-projectile.cache
-projectile-bookmarks.eld
+/lisp/init-private.el
+org-agenda-list.el

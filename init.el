@@ -4,8 +4,8 @@
 ;; You may delete these explanatory comments.
 (defconst *IS-WINDOWS* (eq system-type 'windows-nt))
 (defconst *IS-LINUX* (eq system-type 'gnu/linux))
-(defconst *DOC-HOME-PATH* "~/doc-home")
-(defconst *ORG-MAIN-FILE* "~/doc-home/main.org")
+(defconst *DOC-HOME-PATH* "~/org")
+(defconst *ORG-MAIN-FILE* "~/org/main.org")
 
 (package-initialize)
 
@@ -39,6 +39,10 @@
 ;; Org
 ;; -----------------------------------------------------------------
 (require 'init-org)
+
+;; Private config
+;; -----------------------------------------------------------------
+(require 'init-private)
 
 ;; Custom
 ;; -----------------------------------------------------------------

@@ -50,19 +50,22 @@
 (setq org-agenda-include-all-todo t)
 
 ;; Org ditaa 
-(setq org-ditaa-jar-path "bin/ditaa/ditaa0_9.jar")
+(setq org-ditaa-jar-path "~/.emacs.d/bin/ditaa/ditaa0_9.jar")
+
+
+;;; image
+(setq org-startup-with-inline-images t)
 
 ;; Org plantuml
 (setq org-confirm-babel-evaluate nil)
 (setq org-plantuml-jar-path
-      (expand-file-name "bin/plantuml/plantuml.jar"))
+      (expand-file-name "~/.emacs.d/bin/plantuml/plantuml.jar"))
 (add-hook 'org-babel-after-execute-hook
-      (lambda ()
-        (when org-inline-image-overlays
-          (org-redisplay-inline-images))))
+          (lambda ()
+            (when org-inline-image-overlays
+              (org-redisplay-inline-images))))
 (add-to-list 'org-structure-template-alist
-                      '("u" "#+BEGIN_SRC plantuml :file ?.png :cmdline -charset UTF-8\n 
-skinparam monochrome true\n#+END_SRC"))
+             '("u" "#+BEGIN_SRC plantuml :file ?.png :cmdline -charset UTF-8\n#+END_SRC"))
 
 ;; Org-Refile
 (setq org-refile-targets (list (cons nil (cons :maxlevel 2))))
@@ -75,12 +78,14 @@ skinparam monochrome true\n#+END_SRC"))
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((python . t)
-   (plantuml . t)
    (ditaa . t)
+   (java . t)
+   (emacs-lisp . t)
+   (plantuml . t)
    (clojure . t)))
 
 ;; Open Link in Google Chrome as Default
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")
+;;(setq browse-url-browser-function 'browse-url-generic
+;;      browse-url-generic-program "google-chrome")
 
 (provide 'init-org)
