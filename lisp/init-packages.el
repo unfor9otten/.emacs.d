@@ -1,7 +1,7 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
- (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
 
 ;; cl - Common Lisp Extension
 (require 'cl)
@@ -21,7 +21,7 @@
 ;; Evil Mode Setting
 ;; -------------------------------------------------------------------
 ;; (require 'evil)
-;; (evil-mode 1)
+;; (evil-mode t)
 ;; (setcdr evil-insert-state-map nil)
 
 ;; Evil Leader Key
@@ -69,10 +69,25 @@
 ;; (setq deft-extensions '("md" "org" "txt" "tex"))
 ;; (setq deft-directory "~/.deft/")
 (setq
-    deft-extension "org"
-    deft-directory "~/org/"
-    deft-text-mode 'org-mode
-    deft-use-filename-as-title t)
+ deft-extension "org"
+ deft-directory "~/org/"
+ deft-text-mode 'org-mode
+ deft-use-filename-as-title t)
+
+
+(defun deft-work-loading()
+  (interactive)
+  (setq deft-directory "~/org/work/")
+  (deft-refresh)
+  )
+
+
+(defun deft-all-loading()
+  (interactive)
+  (setq deft-directory "~/org/")
+  (deft-refresh)
+  )
+
 
 ;; js2-mode
 ;; -------------------------------------------------------------------

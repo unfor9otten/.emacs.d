@@ -31,7 +31,7 @@
 
 ;; Org Template
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline *ORG-MAIN-FILE* "NewTask")
+      '(("t" "Todo" entry (file+headline *ORG-MAIN-FILE* "daily-todos")
 	 "* TODO [#B] %?\n  %i\n"
 	 :empty-lines 1)))
 
@@ -65,8 +65,8 @@
             (when org-inline-image-overlays
               (org-redisplay-inline-images))))
 (add-to-list 'org-structure-template-alist
-             '("u" "#+BEGIN_SRC plantuml :file ?.png :cmdline -charset UTF-8\n#+END_SRC"))
-
+;;             '("u" "#+BEGIN_SRC plantuml :file ?.png :cmdline -charset UTF-8\n#+END_SRC"))
+             '("u" "#+BEGIN_SRC plantuml :file ?.png :cmdline \n#+END_SRC"))
 ;; Org-Refile
 (setq org-refile-targets (list (cons nil (cons :maxlevel 2))))
 

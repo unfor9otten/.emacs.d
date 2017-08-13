@@ -13,7 +13,7 @@
 
 (defun indent-region-or-buffer ()
   "Indent a region if selected, otherwise the whole buffer. "
-  (interactive)
+ (interactive)
   (save-excursion
     (if (region-active-p)
 	(progn

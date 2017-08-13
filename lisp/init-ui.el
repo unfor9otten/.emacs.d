@@ -20,9 +20,18 @@
 ;; Change Font-size
 ;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
 (when *IS-WINDOWS*
- (set-face-attribute 'default nil :family "Consolas" :height 120))
+ (set-face-attribute 'default nil :family "Consolas" :height 110))
 
 (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+
+;; Load Editor Theme
+(load-theme 'github t)
+(disable-theme 'github)
+;;(load-theme 'zerodark t)
+(load-theme 'atom-one-dark t)
+;;(load-theme 'monokai t)
+
+;; (load-theme 'solarized-light 1)
 
 
 (provide 'init-ui)

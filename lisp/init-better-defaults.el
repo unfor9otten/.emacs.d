@@ -1,16 +1,5 @@
-;;  ___  __    ___  __   __
-;; |__  |  \ |  |  /  \ |__)
-;; |___ |__/ |  |  \__/ |  \
-;;  __   ___  ___                ___
-;; |  \ |__  |__   /\  |  | |     |
-;; |__/ |___ |    /~~\ \__/ |___  |
 ;; Better Default
 ;; ==================================================================
-
-;; Default UTF-8 Encoding
-(set-language-environment "UTF-8")
-
-(prefer-coding-system 'utf-8)
 
 ;; Disable Backup File
 (setq make-backup-files nil)
@@ -31,12 +20,6 @@
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
-
-;; Load Editor Theme
-(load-theme 'atom-one-dark t)
-;; (load-theme 'github t)
-
-;; (load-theme 'solarized-light 1)
 
 ;; Disable Warning Bell
 (setq ring-bell-function 'ignore)
@@ -126,19 +109,53 @@
 (when *IS-LINUX*
   (defalias 'sh 'shell))
 	
-(when *IS-WINDOWS*
-  (defalias 'sh 'shell)
-  (let* ((git-dir "C:/Program Files/Git")
-         (bash-dir (concat (file-name-as-directory git-dir) "bin")))
-    (setq explicit-shell-file-name (concat (file-name-as-directory bash-dir)
-                                           "bash.exe"))
-    (setq shell-file-name explicit-shell-file-name)
-    (add-to-list 'exec-path git-dir)
-    (add-to-list 'exec-path bash-dir)
-    (setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
-    (setenv "SHELL" shell-file-name)
-    (setenv "PATH" (concat git-dir path-separator
-                           (concat bash-dir path-separator (getenv "PATH"))))))
+;;(when *IS-WINDOWS*
+;;  (let* ((combine-path (lambda (dir dir-or-file)
+;;                         (concat (file-name-as-directory dir) dir-or-file)))
+;;         (base-dir "C:/git-sdk-64")
+;;         (msys2-bin-dir (funcall combine-path base-dir "usr/bin"))
+;;         (mingw64-bin-dir (funcall combine-path base-dir "mingw64/bin"))
+;;         (bash-path (funcall combine-path msys2-bin-dir "bash.exe")))
+;;    (add-to-list 'exec-path msys2-bin-dir)
+;;    (add-to-list 'exec-path mingw64-bin-dir)
+;;    (setq explicit-shell-file-name bash-path)
+;;    (setq shell-file-name bash-path)
+;;    (setenv "SHELL" bash-path)
+;;    (setq explicit-bash.exe-args '("--noediting" "--login" "-i"))
+;;    (setenv "PATH" (concat mingw64-bin-dir path-separator
+;;                           (concat msys2-bin-dir path-separator
+;;                                  (getenv "PATH"))))))
 
+;;(when *IS-WINDOWS*
+;;  (let ((bash-dir "C:/Program Files/Git/bin"))
+;;    (setq explicit-shell-file-name 
+;;      (concat bash-dir "/bash.exe"))
+;;    (setq shell-file-name 
+;;      explicit-shell-file-name)
+;;    (add-to-list 'exec-path bash-dir)
+;;    (setq explicit-bash.exe-args 
+;;      '("--noediting" "--login" "-i"))
+;;    (setenv "SHELL" explicit-shell-file-name)
+;;    (setenv "PATH" (concat bash-dir 
+;;               path-separator 
+;;               (getenv "PATH")))))
+
+
+(when enable-multibyte-characters
+  (set-language-environment "UTF-8")
+  (setq locale-value
+	(if (string= (getenv "LANG") "ko_KR.utf8") 'utf-8 'euc-kr))
+  (prefer-coding-system locale-value)
+  (set-default-coding-systems locale-value)
+  (setq-default file-name-coding-system locale-value)
+  (setq-default locale-coding-system locale-value)
+  (set-terminal-coding-system locale-value)
+  (set-keyboard-coding-system locale-value)
+  (set-selection-coding-system locale-value)
+  )
+
+(when (string-match "^3" (or (getenv "HANGUL_KEYBOARD_TYPE") ""))
+  (setq default-korean-keyboard "3")
+  (setq default-input-method "korean-hangul3"))
 
 (provide 'init-better-defaults)
