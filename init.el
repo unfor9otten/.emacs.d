@@ -5,7 +5,7 @@
 (defconst *IS-WINDOWS* (eq system-type 'windows-nt))
 (defconst *IS-LINUX* (eq system-type 'gnu/linux))
 (defconst *DOC-HOME-PATH* "~/org")
-(defconst *ORG-MAIN-FILE* "~/org/main.org")
+(defconst *ORG-MAIN-FILE* "~/org/todos.org")
 
 (package-initialize)
 
@@ -44,7 +44,9 @@
 ;; -----------------------------------------------------------------
 (require 'init-private)
 
+
 ;; Custom
 ;; -----------------------------------------------------------------
 (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
 (load-file custom-file)
+(put 'upcase-region 'disabled nil)
