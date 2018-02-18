@@ -3,8 +3,8 @@
 ;; Quick Open Config File (init.el)
 (global-set-key (kbd "<f2>") 'open-init-file)
 
-;; Backward Delete One Word
-(global-set-key (kbd "C-w") 'backward-kill-word)
+;; indent-buffer
+(global-set-key (kbd "<f12>") 'indent-buffer)
 
 ;; Open Recent Files List
 ;; (global-set-key (kbd "C-x C-r") 'recentf-open-files)
@@ -46,53 +46,35 @@
 (global-set-key (kbd "C-c r") 'org-capture)
 (global-set-key (kbd "<f5>") (lambda() (interactive) (find-file *ORG-MAIN-FILE*)))
 
-;; Code Indentation
-;; -------------------------------------------------------------------
-(global-set-key (kbd "C-M-\\") 'indent-region-or-buffer)
 
-;; Hippie Expand
-;; -------------------------------------------------------------------
-(global-set-key (kbd "s-/") 'hippie-expand)
-
-;; js2-refactor
-;; -------------------------------------------------------------------
-(js2r-add-keybindings-with-prefix "C-c C-m")
-
-;; Occur Mode
+;;; Occur Mode
 ;; -------------------------------------------------------------------
 (global-set-key (kbd "M-s o") 'occur-dwi)
 
-;; iMenu Mode
+;;; iMenu Mode
 ;; -------------------------------------------------------------------
 (global-set-key (kbd "M-s i") 'counsel-imenu)
 
-;; expand-region
-;; -------------------------------------------------------------------
-(global-set-key (kbd "C-=") 'er/expand-region)
-
-;; iEdit Mode
+;;; iEdit Mode
 ;; -------------------------------------------------------------------
 (global-set-key (kbd "M-s e") 'iedit-mode)
 
-;; helm-ag
+;;; helm-ag
 ;; -------------------------------------------------------------------
 (global-set-key (kbd "C-c p s") 'helm-do-ag-project-root)
 
-;; Neotree
+;;; Neotree
 ;; -------------------------------------------------------------------
 ;; (global-set-key (kbd "C-\\") 'neotree-toggle)
 
-;; Evil
-;; -------------------------------------------------------------------
-;; (define-key evil-insert-state-map [escape] 'evil-normal-state)
 
-;; emacs-lisp-mode
+;;; emacs-lisp-mode
 ;; -------------------------------------------------------------------
 (add-hook 'emacs-lisp-mode-hook
 	  (lambda ()
 	    (define-key emacs-lisp-mode-map "\C-c\C-c" 'eval-defun)))
 
-;; lisp-interaction-mode
+;;; lisp-interaction-mode
 ;; -------------------------------------------------------------------
 (add-hook 'lisp-interaction-mode-hook
           (lambda ()
@@ -101,5 +83,8 @@
 ;; global go to
 ;; -------------------------------------------------------------------
 (global-set-key (kbd "M-g") 'goto-line)
+
+
+;;(global-set-key [f9] 'neotree-toggle)
 
 (provide 'init-keybindings)

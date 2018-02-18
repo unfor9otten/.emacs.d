@@ -1,0 +1,1 @@
+("~/org/" "~/.emacs.d/" "d:/uf9t/project/Modules/FileExtensionChanger/" "d:/xProject/DestinyONE/DestinyECM/" "d:/uf9t/project/DestinyONE/DestinyECM/" "d:/uf9t/project/DestinyONE_5.08.004/" "c:/DestinyAS/bin/release/" "d:/uf9t/project/DestinyONE/")

@@ -37,22 +37,82 @@
   (goto-char (point-min))
   (while (search-forward "\r" nil 1) (replace-match "")))
 
-;; Change web-mode indent level btween 2 and 4
-(defun my-toggle-web-indent ()
+;;; http://emacsredux.com/blog/2013/03/27/copy-filename-to-the-clipboard/
+(defun copy-file-name-to-clipboard ()
+  "Copy the current buffer file name to the clipboard."
   (interactive)
-  ;; web development
-  (if (or (eq major-mode 'js-mode) (eq major-mode 'js2-mode))
-      (progn
-        (setq js-indent-level (if (= js-indent-level 2) 4 2))
-        (setq js2-basic-offset (if (= js2-basic-offset 2) 4 2))))
+  (let ((filename (if (equal major-mode 'ranger-mode)
+                      default-directory
+                    (buffer-file-name))))
+    (when filename
+      (kill-new filename)
+      (message "Copied buffer file name '%s' to the clipboard." filename))))
 
-  (if (eq major-mode 'web-mode)
-      (progn (setq web-mode-markup-indent-offset (if (= web-mode-markup-indent-offset 2) 4 2))
-             (setq web-mode-css-indent-offset (if (= web-mode-css-indent-offset 2) 4 2))
-             (setq web-mode-code-indent-offset (if (= web-mode-code-indent-offset 2) 4 2))))
-  (if (eq major-mode 'css-mode)
-      (setq css-indent-offset (if (= css-indent-offset 2) 4 2)))
+(defun unity-open-editor-log ()
+  (interactive)
+  (let ((path (format "C:/Users/%s/AppData/Local/Unity/Editor/Editor.log"
+                      (getenv "USERNAME"))))
+    (if (file-exists-p path)
+        (progn
+          (find-file path)
+          (auto-revert-tail-mode 1)
+          (read-only-mode 1)
+          (goto-char (point-max)))
+      (message (concat "log file not found - " path)))))
 
-  (setq indent-tabs-mode nil))
+(defun jekyll-default-image ()
+  (interactive)
+  (let ((name (format "{{ site.asseturl }}/%s-00.jpg"
+                      (file-name-base (buffer-file-name)))))
+    (kill-new name)
+    (message "Copied default image name '%s' to the clipboard." name)))
+
+;; sql
+;;(add-to-list 'company-backends 'company-edbi)
+(defun upcase-sql-keywords ()
+  (interactive)
+  (save-excursion
+    (dolist (keywords sql-mode-postgres-font-lock-keywords)
+      (goto-char (point-min))
+      (while (re-search-forward (car keywords) nil t)
+	(goto-char (+ 1 (match-beginning 0)))
+	(when (eql font-lock-keyword-face (face-at-point))
+	  (backward-char)
+	  (upcase-word 1)
+	  (forward-char))))))
+
+(defun my-sql-save-history-hook ()
+  (let ((lval 'sql-input-ring-file-name)
+	(rval 'sql-product))
+    (if (symbol-value rval)
+	(let ((filename
+	       (concat "~/.emacs.d/sql/"
+		       (symbol-name (symbol-value rval))
+		       "-history.sql")))
+	  (set (make-local-variable lval) filename))
+      (error
+       (format "SQL history will not be saved because %s is nil"
+	       (symbol-name rval))))))
+
+(add-hook 'sql-interactive-mode-hook 'my-sql-save-history-hook)
+
+;; http://emacsredux.com/blog/2013/04/02/move-current-line-up-or-down/
+(defun move-line-up ()
+  "Move up the current line."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2)
+  (indent-according-to-mode))
+
+(defun move-line-down ()
+  "Move down the current line."
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(global-set-key [(control shift up)]  'move-line-up)
+(global-set-key [(control shift down)]  'move-line-down)
 
 (provide 'init-helper)

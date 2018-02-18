@@ -20,13 +20,34 @@
 
 ;; Evil Mode Setting
 ;; -------------------------------------------------------------------
-;; (require 'evil)
-;; (evil-mode t)
-;; (setcdr evil-insert-state-map nil)
+(require 'evil)
+;;(require 'org-evil)
+(setq evil-want-C-u-scroll t)
+(setq evil-want-C-w-in-emacs-state t)
+(setq evil-want-C-w-delete nil)
+(evil-mode t)
+  (evil-set-initial-state 'calendar-mode 'emacs)
+  (evil-set-initial-state 'calculator-mode 'emacs)
+  (evil-set-initial-state 'git-rebase-mode 'emacs)
+  (evil-set-initial-state 'finder-mode 'emacs)
+  (evil-set-initial-state 'Man-mode 'emacs)
+  (evil-set-initial-state 'helm-ag-mode 'emacs)
+  (evil-set-initial-state 'ert-results-mode 'emacs)
+  (evil-set-initial-state 'ert-simple-view-mode 'emacs)
+  (evil-set-initial-state 'process-menu-mode 'emacs)
+  (setq-default evil-symbol-word-search t)
 
-;; Evil Leader Key
-;; -------------------------------------------------------------------
-;; (global-evil-leader-mode)
+  (add-hook 'emacs-lisp-mode-hook
+            #'(lambda ()
+                (modify-syntax-entry ?_ "w")
+                (modify-syntax-entry ?- "w")))
+  (add-hook 'c-mode-common-hook
+            #'(lambda () (modify-syntax-entry ?_ "w")))
+  (add-hook 'elixir-mode-hook
+            #'(lambda ()
+                (modify-syntax-entry ?_ "w")
+                (modify-syntax-entry ?: ".")
+                (modify-syntax-entry ?% ".")))
 
 ;; which-key
 ;; -------------------------------------------------------------------

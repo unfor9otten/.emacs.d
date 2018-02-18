@@ -1,5 +1,19 @@
 (require 'org)
 
+(require 'org-crypt)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance (quote ("crypt")))
+;; GPG key to use for encryption
+;; Either the Key ID or set to nil to use symmetric encryption.
+(setq org-crypt-key nil)
+
+(setq org-export-allow-BIND t)
+
+
+(eval-after-load "artist"
+   '(define-key artist-mode-map [(down-mouse-3)] 'artist-mouse-choose-operation)
+   )
+
 ;; Enable Code Block Syntax Highlight
 (setq org-src-fontify-natively t)
 
@@ -7,7 +21,7 @@
 (add-hook 'org-mode-hook 'org-indent-mode)
 
 ;; Set Org-mode Agenda File
-(setq org-agenda-files '("~/org"))
+(setq org-agenda-files '("~/org/management/" "~/org/work/redmine/2018/works.org"))
 
 ;; Change Heading Size
 (custom-set-faces
@@ -49,7 +63,7 @@
 (setq org-agenda-include-diary t)
 (setq org-agenda-include-all-todo t)
 
-;; Org ditaa 
+;; Org ditaa
 (setq org-ditaa-jar-path "~/.emacs.d/bin/ditaa/ditaa0_9.jar")
 
 
@@ -72,7 +86,7 @@
 
 ;; Start Emacs with Agenda View
 ;; (org-agenda-list)
-(find-file *ORG-MAIN-FILE*)
+;;(find-file *ORG-MAIN-FILE*)
 
 ;; Add Org-babel
 (org-babel-do-load-languages

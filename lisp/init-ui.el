@@ -1,7 +1,4 @@
-;;       __   __   ___       __             __   ___
-;;  /\  |__) |__) |__   /\  |__)  /\  |\ | /  ` |__
-;; /~~\ |    |    |___ /~~\ |  \ /~~\ | \| \__, |___
-;; Appearance Related Setting
+;; UI
 ;; ===================================================================
 ;; Hide Startup screen
 (setq inhibit-splash-screen t)
@@ -18,20 +15,13 @@
 ;; Change cursor style
 (setq-default cursor-type 'bar)
 ;; Change Font-size
-;; http://stackoverflow.com/questions/294664/how-to-set-the-font-size-in-emacs
 (when *IS-WINDOWS*
- (set-face-attribute 'default nil :family "Consolas" :height 110))
+ (set-face-attribute 'default nil :family "Consolas" :height 120))
+;; (set-face-attribute 'default nil :family "NanumGothicCoding" :height 120))
 
-(set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+;;(set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
 
-;; Load Editor Theme
-(load-theme 'github t)
-(disable-theme 'github)
-;;(load-theme 'zerodark t)
+(require 'atom-one-dark-theme)
 (load-theme 'atom-one-dark t)
-;;(load-theme 'monokai t)
-
-;; (load-theme 'solarized-light 1)
-
 
 (provide 'init-ui)

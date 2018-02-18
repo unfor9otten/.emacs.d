@@ -1,11 +1,7 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
 (defconst *IS-WINDOWS* (eq system-type 'windows-nt))
 (defconst *IS-LINUX* (eq system-type 'gnu/linux))
 (defconst *DOC-HOME-PATH* "~/org")
-(defconst *ORG-MAIN-FILE* "~/org/todos.org")
+(defconst *ORG-MAIN-FILE* "~/org/management/notes.org")
 
 (package-initialize)
 
@@ -15,6 +11,10 @@
 (pallet-mode 1)
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+
+;; 기본 환경설정
+;; -----------------------------------------------------------------
+(require 'init-config)
 
 ;; Package Management
 ;; -----------------------------------------------------------------
@@ -27,10 +27,6 @@
 ;; UI Related
 ;; -----------------------------------------------------------------
 (require 'init-ui)
-
-;; Better Editor Default
-;; -----------------------------------------------------------------
-(require 'init-better-defaults)
 
 ;; Keybindings
 ;; -----------------------------------------------------------------
