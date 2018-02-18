@@ -38,6 +38,7 @@
 (depends-on "key-chord")
 (depends-on "leuven-theme")
 (depends-on "linum-relative")
+(depends-on "magit")
 (depends-on "markdown-mode")
 (depends-on "mode-icons")
 (depends-on "multiple-cursors")

@@ -40,7 +40,6 @@
 ;; -----------------------------------------------------------------
 (require 'init-private)
 
-
 ;; Custom
 ;; -----------------------------------------------------------------
 (setq custom-file (expand-file-name "lisp/custom.el" user-emacs-directory))
